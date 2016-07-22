@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DVRPC - CyclePhilly Data Summary (May-October 2014)</title>
+
+    <!-- Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!--  <link href="css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css"> -->
+  <!--https://github.com/jharding/typeahead.js-bootstrap.css--> 
+  	<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+
+
+    <!--[if lte IE 8]>
+        <link href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" rel="stylesheet" type="text/css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <style>
+        html, body, #container {
+            height: 100%;
+         /*   margin: 0px; */
+        }
+        body {
+            padding-top: 50px;
+            overflow-y:hidden;
+        }
+        label {
+            font-weight: normal;
+        }
+        #map{
+          height: 100%;
+        }
+        .leaflet-map-pane {
+        z-index: 1 !important;
+        }
+       .panel-heading a:hover {
+            text-decoration: none;
+        }
+        #loading {
+            position: absolute;
+            width: 220px;
+            height: 19px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -110px;
+            z-index: 20001;
+        }
+		    #title{
+		        position: absolute;
+            width: 220px;
+            height: 19px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -110px;
+            z-index: 20001;
+		    }
+        .navbar .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+            white-space: nowrap;
+        }
+		    .navbar-inverse{
+         background-color:#0074ad;
+		    }
+        @media (max-width: 992px) {
+            .navbar .navbar-brand {
+                font-size: 22px;
+                float: left;
+            }
+            .search-container {
+                width: 150px;
+            }
+            .leaflet-control-attribution {
+                display: none;
+            }
+        }
+        @media (max-width: 768px){
+            .search-container {
+                width: 100%;
+            }
+        }
+        /* Print Handling */
+        @media print {
+            .navbar, .toggle, #sidebar {
+                display: none !important;
+            }
+        }
+	
+		 .navbar-inverse .navbar-nav > li > a {
+      color: rgb(200, 200, 200);
+      }
+      .modal-header {
+       background-color:#0074ad;
+      }
+      .modal-title  {
+      color: white;
+      }
+      .close {
+          float: right;
+          font-size: 21px;
+          font-weight: bold;
+          line-height: 1;
+          color: white;
+          text-shadow: 0px 1px 0px rgb(255, 255, 255);
+          opacity: 1;
+      }
+
+      #legendBox {
+      position: absolute;
+      bottom: 45px;
+      left: 10px;
+      z-index: 1001;
+      background-color: white;
+      padding: 8px;
+      border: 1px solid #444444;
+      width:260px;
+      height:185px;
+      }
+
+      #DBox2 {
+      position: absolute;
+      background:#808080;
+      bottom: 25px;
+      right: 1px;
+      z-index: 1001;
+      width:350px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 1px 20px;
+      box-shadow: 10px 10px 65px 0px rgba(0, 0, 0, 0.75);
+      }
+
+      p.content-one {
+      color: white;
+      }
+
+      a.one {
+      color:white;
+      }
+
+      .left { float:left; width:50%; clear:left; }
+      .right { float:right; width:50%; clear:right;list-style-type: none; }
+
+      #layer_selector li {
+      border-bottom: 1px solid #999;
+      padding: 15px 30px;
+      font-family: "Helvetica", Arial;
+      font-size: 13px;
+      font-weight: normal;
+      color: #000;
+      cursor: auto;
+      background-color: #fff;
+      }
+
+      #layer_selector li:hover {
+      background-color: #F0F0F0;
+      cursor: pointer;
+      }
+
+    #layer_selector li.selected {
+      background-color: #EEE;
+      font-weight: bold;
+    }
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script src="js/css3-mediaqueries.ie.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+			<span>	<a  href="http://www.dvrpc.org" target="_new"><img class="dvrpclogo" style="margin:10px 0px 0px 20px" src="img/dvrpc_logo_small.png"/></a> 
+			<a  href="http://www.cyclephilly.org/" target="_new"><img  style="margin:5px 0px 0px 20px" src="img/cpheader_bike.png"/></a> 	
+            <a  href="http://www.cyclephilly.org/" target="_new"><img  style="margin:4px 0px 0px 5px" src="img/cpheader.png"/></a>      	
+	        <img  style="margin:4px 0px 0px 5px" src="img/cpsubheader_rd2.png"/>
+			</span> 
+        </div>
+		
+        <div id="layer_selector_main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+			  <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" ></i>&nbsp;&nbsp;About</a></li>
+			  
+                 <li class="dropdown">
+                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-wrench" ></i>&nbsp;&nbsp;Tools and Data
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                    
+					   <li  id="zoomToRegion"><a href="javascript:void(0);"><i class="icon-fullscreen"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+					   <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#legendModal').modal('show'); return false;"><i class="icon-list-alt"></i>&nbsp;&nbsp;Data Dictionary</a>
+					   </li>
+                        <li class="divider"></li>
+						<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#downloadModal').modal('show'); return false;"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Download Data</a>
+					   </li>
+                    </ul>
+                </li>
+		  
+		  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i>&nbsp;Choose a Map</a>
+          <ul class="dropdown-menu" id="layer_selector" style="margin-right:15px;">
+            <li id="purposemax" class="button purposemax selected" style="text-transform: none;">Most Popular Trip Purpose</li>
+            <li id="ttrips" class="button ttrips" style="text-transform: none;">Total Trips</li>
+            <li id="workcommute" class="button workcommute">Commute</li>
+            <li id="social" class="button social">Social</li>
+            <li id="exercise" class="button exercise">Exercise</li>
+            <li id="errand" class="button errand">Errand</li>
+            <li id="other" class="button other">Other (not specified)</li>
+            <li id="otherwork" class="button otherwork">Other Work Related</li>
+            <li id="school" class="button school">School</li>
+            <li id="shopping" class="button shopping">Shopping</li>
+          </ul>
+        </li>
+		
+          </ul>
+         
+        </div><!--/.navbar-collapse -->
+    </div>
+
+ <div class="row" id="container">
+		
+        <div class="col-sm-12 col-lg-12" id="map"></div>	
+       <div id="legendBox"></div>	
+			   <div id="DBox2">
+			   <p class="expand-one"><a class="one" href="#"><strong>About this Map</strong></a> </p>
+			   <p class="content-one">This map symbolizes total CyclePhilly trips by facility from May, 2014 through April, 2016<br> (2 years; 12,202 individual trips by 300 unique CyclePhilly users).<br><br>Note that this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</p>
+
+         <!-- Round 1(6 months; 8,340 individual trips by 220 unique CyclePhilly users). -->
+			   </div>	
+ 
+			 
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>	
+	<!--   <script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.standalone.js'></script> -->
+	
+<!-- start About Modal -->
+	<div class="modal fade" id="aboutModal">
+        <div class="modal-dialog" style="width:650px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <span>
+            	      <img  style="margin:5px 0px 0px 0px" src="img/cpheader_bike.png"/>	
+                    <img  style="margin:4px 0px 0px 5px" src="img/cpheader.png"/>     	
+                   <img  style="margin:4px 0px 0px 5px" src="img/cpsubheader_rd2.png"/> 	
+			              </span> 
+                </div>
+          <div class="modal-body">
+				    <div class="clearfix">
+              <ul id="aboutTabs" class="nav nav-tabs">
+                  <li class="active"><a href="#about" data-toggle="tab"><i class=""></i>&nbsp;About this map</a></li>
+					        <li><a href="#aboutCP" data-toggle="tab"><i class=""></i>&nbsp;About CyclePhilly</a></li>
+                  <li><a href="#disclaimer" data-toggle="tab"><i class="i"></i>&nbsp;Disclaimer</a></li>
+			            <li><a href="#contact"  data-toggle="tab"><i class="icon-globe"></i>&nbsp;Contact</a></li>
+              </ul>
+            <div id="aboutTabsContent" class="tab-content" style="padding-top: 10px;">
+                <div class="tab-pane fade active in" id="about">
+                    <B><Font color=red>PLEASE NOTE:</FONT></B>
+        						<p>
+        						This map symbolizes <b>total CyclePhilly trips</b> by facility <b>from May, 2014 to April, 2016 </b>, with most trips being logged during May to October promotion periods in 2014 and 2015. Raw CyclePhilly trip data was processed and snapped to the nearest road or trail segment using a special algorithm so that total volumes by segment could be calculated and compared (some facilities--particularly park trails--may not be in the mapped network; CyclePhilly data for these segments is not shown). Trip ends have been obscured to protect users' privacy. 
+                    <br><br>Note that<b> this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</b>
+                    <br><br>
+                    To access DVRPC's full pedestrian and bicycle counts portal, <a href="http://www.dvrpc.org/webmaps/pedbikecounts/" target="_new">click here</a>.<br>
+                    <!-- <img style="margin:8px 10px 10px 0px;" src="img/dvrpc_bikeped.png"/> -->
+        
+        						</p> 
+        	      </div>
+        		    <div class="tab-pane fade " id="aboutCP">   
+          						<img  style="margin:5px 10px 10px 5px;float:right;" src="img/phone.jpeg"/>
+          						<p> 
+          						CyclePhilly is a smartphone app for recording bicycle trips. Data from the app can be used by transportation planners in the Philadelphia region to make Philly a better place to ride.
+          						CyclePhilly was developed by <a href="https://codeforphilly.org/projects/Bike_Route_Tracker" target="_new"> Code for Philly </a>, a group of citizens working to harness the power of technology to modernize citizenship in Philadelphia.
+          						<br><br>
+          						<a href="http://www.cyclephilly.org/" target="_new">Visit the CyclePhilly website to learn more about the app and the team.</a>
+                      <br><br>
+                      Winner of a <a href="http://awards.codeforamerica.org/2015/winner/CyclePhilly/" target="_new"> 2015 Code for America Technology Award </a>
+                      <a  href="http://awards.codeforamerica.org/2015/winner/CyclePhilly/" target="_new"><img style="margin:8px 10px 10px 0px;" src="img/CFA_award.png"/></a>
+          						</p>	
+        				</div>
+                <div class="tab-pane fade text-danger" id="disclaimer">
+                      <p>This web page is a public resource of general information. The Delaware Valley Regional Commission (DVRPC) makes no warranty, 
+        							representation, or guarantee as to the content, sequence, accuracy, timeliness, or completeness of any of the spatial data or database 
+        							information provided herein. DVRPC and partner state, local, and other agencies shall assume no liability for errors, omissions, or 
+        							inaccuracies in the information provided regardless of how caused; or any decision made or action taken or not taken by any person relying 
+        							on any information or data furnished within.</p>
+                </div> 
+        				<div class="tab-pane fade " id="contact">
+        							<p><b>Cassidy  Boulan, AICP</b><br/>
+        								Transportation Planner<br>
+        								Office of Transit, Bicycle, and Pedestrian Planning<br/>
+        								Phone: 215-238-2832 <br/>
+        								<a href="mailto:cboulan@dvrpc.org">cboulan@dvrpc.org </a> 
+        							  </p>
+        							 <p>
+        							   <b> Christopher Pollard</b><br/>
+        								Manager, Geospatial Application Development<br>
+        								Office of Geographic Information Systems<br/>
+        								Phone: 215-238-2815 <br/>
+        								<a href="mailto:cpollard@dvrpc.org">cpollard@dvrpc.org </a> 
+        								</p>
+                </div>
+          </div> <!-- /.tab-content -->
+         </div><!-- /.clearfix -->
+        </div><!-- /.modal-body -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+	 </div><!-- /.modal -->
+<!-- end About Modal -->
+
+   <div class="modal fade" id="legendModal">
+        <div class="modal-dialog"style="width:650px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Data Dictionary</h4>
+                </div>
+                <div class="modal-body">
+				<table class="table table-striped">
+				  <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>Description</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">LINKNO</th>
+          <td>Unique Link Value from OSM network</td>
+          <td>OSM</td>
+
+        </tr>
+        <tr>
+          <th scope="row">LinkName</th>
+          <td>Road name</td>
+          <td>OSM</td>
+        </tr>
+        <tr>
+          <th scope="row">TTRIPS</th>
+          <td>Totals Trips - all CyclePhilly trips purposes</td>
+          <td>CyclePhilly</td>
+        </tr>
+        <tr>
+          <th scope="row">TOPPURPOSE</th>
+          <td>Top Purpose - most popular trip purpose for that segment</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">COTRIPS</th>
+          <td>Commute trip - to get between home and your primary work location.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">ERTRIPS</th>
+          <td>Errand trip - to attend to personal business such as banking, doctor visit, going to the gym, etc.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">EXTRIPS</th>
+          <td>Exercise trip - exercise or biking for the sake of biking.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">OTTRIPS</th>
+          <td>Other trip - if none of the other reasons applied to the users trip.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">SCTRIPS</th>
+          <td>School trip - to go to or from school or college.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">SHTRIPS</th>
+          <td>Shopping trip - to purchase or bring home goods or groceries.</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">SOTRIPS</th>
+          <td>Social trip - going to or from a social activity (e.g. at a friends’ house, the park, a restaurant, or the movies).</td>
+          <td>CyclePhilly</td>
+        </tr>
+		      <tr>
+          <th scope="row">WOTRIPS</th>
+          <td>Other Work Related trip - to go to or from business-related meeting, function, or work-related errand for your job.</td>
+          <td>CyclePhilly</td>
+        </tr>
+      </tbody>
+				</table>
+				    						
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+	
+	  <div class="modal fade" id="downloadModal">
+        <div class="modal-dialog"style="width:750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">CyclePhilly Datasets</h4>
+                </div>
+                <div class="modal-body">
+				<div class="clearfix">
+				<p>These datasets reflect CyclePhilly trips that were mappable to DVRPC's Open Street Map facility network from May through October, 2014 (6 months; 8,340 individual trips by 220 unique CyclePhilly users). 
+				CyclePhilly trip data was processed and snapped to the nearest road or trail segment using a special algorithm so that total volumes by segment could be calculated and compared (some facilities--particularly 
+				park trails--may not be in the mapped network; CyclePhilly data for these segments is not shown). Note that the CyclePhilly trips do not reflect all bicycling in the city and region; CyclePhilly users' trip patterns 
+				may not reflect those of all cyclists. Trip ends (origin/destination) have been 'fuzzed' to protect users' privacy, so true start and stop locations are obscured in these datasets. Please refer to the description below 
+				for information related to some of the field in the datasets; a data dictionary is also included within each ZIP file.
+				</p>			
+			
+			    <hr 75%>
+				<li class="left"><B>Trip detail by segment: </B><br><i>Discrete trip data for each segment in the network</i></li>
+				<li class="right">
+				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/trip_detail_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[27 MB zip]&nbsp;&nbsp;</small></a>
+				<a href="http://mapshaper.org/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson (N/A)</a>
+				</li><br><br>
+				<li class="left"><B>Trip by trip summary: </B><br><i>Line work for individual CyclePhilly trips</i></li>	
+				<li class="right">
+				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[3.2 MB zip]&nbsp;&nbsp;</small></a>
+			    <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[4.8 MB zip]</small></a>
+				</li>	<br>
+				<li class="left"><B>Trip purpose summary by segment: </B><br><i>Aggregated/summarized data for each segment in the network</i></li>	
+				<li class="right">
+	            <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[1 MB zip]&nbsp;&nbsp;</small></a>				
+		    	<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_Geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[1.1 MB zip]</small></a>
+				</li>	<br>
+				<li class="left"><B>Segment network nodes: </B><br><i>Can be used with the above datasets to support spatial analysis</i></li>	
+				<li class="right">
+				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/nodes_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[0.71 MB zip]&nbsp;&nbsp;</small></a>
+				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/nodes_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[0.82 MB zip]</small></a>
+			    </li>
+				</div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+		
+    <script src="js/app.js"></script>
+
+		<script>var _gaq=[['_setAccount','UA-9825778-1'],['_trackPageview']];(function(d){var g=d.createElement('script'),s=d.scripts[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document))</script>
+  </body>
+</html>

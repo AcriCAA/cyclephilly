@@ -1,0 +1,96 @@
+/* ------------------
+ styling for the tables 
+   ------------------   */
+ #cyclephillydata {
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+}
+th {
+    text-align: center;
+}
+   
+#cyclephillydata .hiconeven
+{
+  border: 2px solid black;
+}
+   
+#cyclephillydata .hiconodd
+{
+  border: 2px solid black;
+}
+
+
+#icon{
+  display: block;
+    margin-left: auto;
+    margin-right: auto
+  
+}
+
+ #cyclephillydata .odd
+{
+  background: #E5E5E5; 
+  border-right: 2px solid black;
+}
+
+#cyclephillydata .even
+{
+ 
+  border-right: 2px solid black;
+}
+
+ #cyclephillydata .odd th
+{ 
+  padding: 4px;
+  border-bottom: 1px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+}
+
+ #cyclephillydata .odd td
+{
+  border: 1px solid black;
+  padding: 2px;
+  
+}
+
+ #cyclephillydata .even th
+{ 
+  padding: 4px;
+  border-bottom: 1px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+}
+
+ #cyclephillydata .even td
+{
+  border: 1px solid black;
+  padding: 2px;
+}
+
+#cyclephillydata .total
+{
+ 
+  border-right: 2px solid black;
+}
+
+
+ #cyclephillydata .total th
+{ 
+  padding: 4px;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+}
+
+ #cyclephillydata .total td
+{
+  padding: 2px;
+  border-top: 2px solid black;
+    border-right: 1px solid black;
+	border-bottom: 2px solid black;
+  background: #F2DDDD; 
+}
+
