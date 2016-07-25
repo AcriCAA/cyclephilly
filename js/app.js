@@ -1,7 +1,7 @@
-   visLayerSwitcher();
+  visLayerSwitcher();
 
   $('.expand-one').click(function(){
-    $('.content-one').slideToggle('slow'); return false;
+  $('.content-one').slideToggle('slow'); return false;
 	});
 
   var selectedLayer;
@@ -9,7 +9,7 @@
 	$('#DBox').appendTo('#map');
 	  
 	$(document).ready(function() {
-	  $('#aboutModal').modal();
+	 // $('#aboutModal').modal();
 		 loadImageTOP();
   });	
 
@@ -68,59 +68,59 @@
   function visLayerSwitcher() {
 // custom infowindow
   var INFOWINDOW_TEMPLATE = [
- '<div class="cartodb-popup header blue v2">',
+ '<div class="cartodb-popup header v2 stye="background:#000000">',
   '<a href="#close" class="cartodb-popup-close-button close">x</a>',
   '<div class="cartodb-popup-header">',
-    '<h4>Road name</h4>',
+    '<h4 style="color: #ffffff;">Segment Name</h4>',
     '<h1>{{linkname}}</h1>',
     '<span class="separator"></span>',
   '</div>',
   '<div class="cartodb-popup-content-wrapper">',
     '<div class="cartodb-popup-content">',
-      '<h4>Top trip purpose</h4>',
+      '<h4 style="color: #808080;">Top trip purpose</h4>',
       '<p>{{purpose}}</p>',
         '<table id="cyclephillydata">',
-              '<thead>',
-                 '<tr>',
-                 '<td class="hiconeven"><b>', 
-                 'Trip Purpose Type' ,
-                 '</b></td>',
-                 '<th class="hiconodd"></th>' ,
-                 '</tr>',
-              '</thead>',
+             // '<thead>',
+             //    '<tr>',
+             //    '<td class="hiconeven"><b>', 
+             //    'Trip Purpose Type' ,
+            //     '</b></td>',
+            //     '<th class="hiconodd"></th>' ,
+            //     '</tr>',
+            //  '</thead>',
               '<tbody>',
                  '<tr class="odd">',
                  '<th>Commute</th><td>',
                  '{{cotrips}}',
-                 '</td><td>' ,
+                 '</td>' ,
                  '<tr class="even">',
                  '<th>Social</th><td>',
                  '{{sotrips}}',
-                 '</td><td>' ,
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>Exercise</th><td>' ,
                  '{{extrips}}',
-                 '</td><td>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Errand</th><td>',
                  '{{ertrips}}',
-                 '</td><td>' ,
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>Other (not specified)</th><td>' ,
                  '{{ottrips}}',
-                 '</td><td>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Other Work Related</th><td>',
                  '{{wotrips}}',
-                 '</td><td>' ,
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>School</th><td>' ,
                  '{{sctrips}}',
-                 '</td><td>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Shopping</th><td>',
                  '{{shtrips}}',
-                 '</td><td>' ,
+                 '</td>' ,
               '</tbody>',           
                  '<table>',
 
