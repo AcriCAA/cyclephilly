@@ -1,17 +1,38 @@
   visLayerSwitcher();
 
-  $('.expand-one').click(function(){
-  $('.content-one').slideToggle('slow'); return false;
-	});
+//  $('.expand-one').click(function(){
+//  $('.content-one').slideToggle('slow'); return false;
+//	});
 
   var selectedLayer;
 	$('#legendBox').appendTo('#map');
 	$('#DBox').appendTo('#map');
+
+
+    // legend toggle
+$(document.body).on('click', '.expand-one', function(){
+    var toggleStatus = $('.content-one').attr('data-status');
+
+    if(toggleStatus === 'closed'){
+        $('.content-one').css('width', '320px').css('height', 'auto').attr('data-status', 'open');
+        $('#legend-icon i').toggleClass('glyphicon glyphicon-list glyphicon glyphicon-minus');
+        $('#legend-icon .legend-label').hide();
+        $('.map-legend-items').show();
+    } else{
+       // $('.content-one').css('width', '80px').css('height', '32px').attr('data-status', 'closed');
+        $('.content-one').slideToggle('slow'); return false;
+        $('#legend-icon i').toggleClass('glyphicon glyphicon-minus glyphicon glyphicon-list');
+        $('#legend-icon .legend-label').show();
+        $('.map-legend-items').hide();
+    }
+});
 	  
 	$(document).ready(function() {
 	 // $('#aboutModal').modal();
 		 loadImageTOP();
   });	
+
+
 
  function loadImageTOP(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_top.png)');
@@ -64,6 +85,8 @@
   $('#legendBox').css('width', '180');
   $('#legendBox').css('height', '160');
   }
+
+
   
   function visLayerSwitcher() {
 // custom infowindow
@@ -263,5 +286,6 @@
 }
 }
       });
+
 
 } /* end function () */
