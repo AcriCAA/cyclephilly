@@ -11,51 +11,39 @@
 }
 th {
     text-align: center;
-}
-   
+    font-weight: normal;
+}  
 #cyclephillydata .hiconeven{
-  border: 2px solid black;
+  border: 1px solid black;
 }
    
 #cyclephillydata .hiconodd{
-  border: 2px solid black;
+  border: 1px solid black;
 }
-
-#icon{
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-
  #cyclephillydata .odd {
   background: #E5E5E5; 
-  border-right: 2px solid #808080;
+  border-right: 1px solid #808080;
 }
-
 #cyclephillydata .even {
- border-right: 2px solid #808080;
+ border-right: 1px solid #808080;
 }
-
- #cyclephillydata .odd th { 
+#cyclephillydata .odd th { 
   padding: 4px;
   border-top: 1px solid #808080;
   border-bottom: 1px solid #808080;
-  border-right: 2px solid #808080;
-  border-left: 2px solid #808080;
+  border-right: 1px solid #808080;
+  border-left: 1px solid #808080;
 }
-
  #cyclephillydata .odd td {
   border: 1px solid #808080;
   padding: 2px; 
 }
-
  #cyclephillydata .even th { 
   padding: 4px;
   border-bottom: 1px solid #808080;
-  border-right: 2px solid #808080;
-  border-left: 2px solid #808080;
+  border-right: 1px solid #808080;
+  border-left: 1px solid #808080;
 }
-
  #cyclephillydata .even td {
   border: 1px solid #808080;
   padding: 2px;

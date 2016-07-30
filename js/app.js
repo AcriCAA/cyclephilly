@@ -1,31 +1,39 @@
   visLayerSwitcher();
 
-//  $('.expand-one').click(function(){
-//  $('.content-one').slideToggle('slow'); return false;
-//	});
-
   var selectedLayer;
 	$('#legendBox').appendTo('#map');
 	$('#DBox').appendTo('#map');
 
 
+$(function () {
+    $('.glyphicon').unbind('click');
+    $('.glyphicon').click(function (e) {
+        $(this).toggleClass('glyphicon glyphicon-plus glyphicon glyphicon-minus');
+        $('.content-one').slideToggle('slow'); return false;
+});
+  });
+
+
     // legend toggle
+/*
 $(document.body).on('click', '.expand-one', function(){
     var toggleStatus = $('.content-one').attr('data-status');
 
-    if(toggleStatus === 'closed'){
+    if(toggleStatus === 'open'){
         $('.content-one').css('width', '320px').css('height', 'auto').attr('data-status', 'open');
+        $('.content-one').slideToggle('slow'); return false;
         $('#legend-icon i').toggleClass('glyphicon glyphicon-list glyphicon glyphicon-minus');
         $('#legend-icon .legend-label').hide();
         $('.map-legend-items').show();
     } else{
-       // $('.content-one').css('width', '80px').css('height', '32px').attr('data-status', 'closed');
+        $('.content-one').attr('data-status', 'closed');
         $('.content-one').slideToggle('slow'); return false;
         $('#legend-icon i').toggleClass('glyphicon glyphicon-minus glyphicon glyphicon-list');
         $('#legend-icon .legend-label').show();
         $('.map-legend-items').hide();
     }
-});
+}); */
+
 	  
 	$(document).ready(function() {
 	 // $('#aboutModal').modal();
@@ -100,8 +108,8 @@ $(document.body).on('click', '.expand-one', function(){
   '</div>',
   '<div class="cartodb-popup-content-wrapper">',
     '<div class="cartodb-popup-content">',
-      '<h4 style="color: #808080;">Top trip purpose</h4>',
-      '<p>{{purpose}}</p>',
+      '<p>Top Trip Purpose : <b>{{purpose}}</b></p>',
+      '<p>Total CyclePhilly Trips : <b> {{ttrips}} </b></p>',
         '<table id="cyclephillydata">',
              // '<thead>',
              //    '<tr>',
@@ -114,35 +122,35 @@ $(document.body).on('click', '.expand-one', function(){
               '<tbody>',
                  '<tr class="odd">',
                  '<th>Commute</th><td>',
-                 '{{cotrips}}',
+                 '<b>{{cotrips}}</b>',
                  '</td>' ,
                  '<tr class="even">',
                  '<th>Social</th><td>',
-                 '{{sotrips}}',
+                 '<b>{{sotrips}}</b>',
                  '</td>' ,
                  '<tr class="odd">',
                  '<th>Exercise</th><td>' ,
-                 '{{extrips}}',
+                 '<b>{{extrips}}</b>',
                  '</td>',
                  '<tr class="even">',
                  '<th>Errand</th><td>',
-                 '{{ertrips}}',
+                 '<b>{{ertrips}}</b>',
                  '</td>' ,
                  '<tr class="odd">',
                  '<th>Other (not specified)</th><td>' ,
-                 '{{ottrips}}',
+                 '<b>{{ottrips}}</b>',
                  '</td>',
                  '<tr class="even">',
                  '<th>Other Work Related</th><td>',
-                 '{{wotrips}}',
+                 '<b>{{wotrips}}</b>',
                  '</td>' ,
                  '<tr class="odd">',
                  '<th>School</th><td>' ,
-                 '{{sctrips}}',
+                 '<b>{{sctrips}}</b>',
                  '</td>',
                  '<tr class="even">',
                  '<th>Shopping</th><td>',
-                 '{{shtrips}}',
+                 '<b>{{shtrips}}</b>',
                  '</td>' ,
               '</tbody>',           
                  '<table>',
