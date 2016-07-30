@@ -126,7 +126,6 @@
       width:260px;
       height:185px;
       }
-
       #DBox2 {
       position: absolute;
       background:#808080;
@@ -139,10 +138,15 @@
       padding: 1px 20px;
       box-shadow: 10px 10px 65px 0px rgba(0, 0, 0, 0.75);
       }
+      .expand-one{
+      color: white;
+      }
+      .glyphicon{
+        cursor: pointer;
+      }
       p.content-one {
       color: white;
       }
-
       a.one {
       color:white;
       }
@@ -168,6 +172,9 @@
       #layer_selector li.selected {
         background-color: #EEE;
         font-weight: bold;
+      }
+      .table{
+        font-size: 90%;
       }
     </style>
 
@@ -276,7 +283,7 @@
                     <B><Font color=red>PLEASE NOTE:</FONT></B>
         						<p>
         						This map symbolizes <b>total CyclePhilly trips</b> by facility <b>from May, 2014 to April, 2016 </b>, with most trips being logged during May to October promotion periods in 2014 and 2015. Raw CyclePhilly trip data was processed and snapped to the nearest road or trail segment using a special algorithm so that total volumes by segment could be calculated and compared (some facilities--particularly park trails--may not be in the mapped network; CyclePhilly data for these segments is not shown). Trip ends have been obscured to protect users' privacy. 
-                    <br><br>Note that<b> this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</b>
+                    <br><br><b>Note that this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</b>
                     <br><br>
                     To access DVRPC's full pedestrian and bicycle counts portal, <a href="http://www.dvrpc.org/webmaps/pedbikecounts/" target="_new">click here</a>.<br>
                     <!-- <img style="margin:8px 10px 10px 0px;" src="img/dvrpc_bikeped.png"/> -->
@@ -336,9 +343,9 @@
 				<table class="table table-striped">
 				  <thead>
         <tr>
-          <th>Field Name</th>
-          <th>Description</th>
-          <th>Source</th>
+          <th><b>Field Name</b></th>
+          <th><b>Description</b></th>
+          <th><b>Source</b></th>
         </tr>
       </thead>
       <tbody>
@@ -420,34 +427,29 @@
                 </div>
                 <div class="modal-body">
 				<div class="clearfix">
-				<p>These datasets reflect CyclePhilly trips that were mappable to DVRPC's Open Street Map facility network from May through October, 2014 (6 months; 8,340 individual trips by 220 unique CyclePhilly users). 
-				CyclePhilly trip data was processed and snapped to the nearest road or trail segment using a special algorithm so that total volumes by segment could be calculated and compared (some facilities--particularly 
-				park trails--may not be in the mapped network; CyclePhilly data for these segments is not shown). Note that the CyclePhilly trips do not reflect all bicycling in the city and region; CyclePhilly users' trip patterns 
-				may not reflect those of all cyclists. Trip ends (origin/destination) have been 'fuzzed' to protect users' privacy, so true start and stop locations are obscured in these datasets. Please refer to the description below 
-				for information related to some of the field in the datasets; a data dictionary is also included within each ZIP file.
+				<p>These datasets contain CyclePhilly trips <b>from May, 2014 to April, 2016</b> (2 years; 12,202 individual trips by 300 unique CyclePhilly users) that were mappable to DVRPC's Open Street Map facility network. CyclePhilly trip data was processed and snapped to the nearest road or trail segment using an algorithm so that total volumes by segment could be calculated and compared (some facilities--particularly trails--may not be in the mapped network; CyclePhilly data for these segments is not shown). <b> Note the data sets include only CyclePhilly trips; CyclePhilly users' trip patterns may not reflect those of all cyclists.</b> Trip ends (origin/destination) have been 'fuzzed' to protect users' privacy, so true start and stop locations are obscured in these datasets. Please refer to the descriptions below for information on the datasets; a data dictionary is also included within each ZIP file.
 				</p>			
-			
-			    <hr 75%>
-				<li class="left"><B>Trip detail by segment: </B><br><i>Discrete trip data for each segment in the network</i></li>
-				<li class="right">
-				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/trip_detail_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[27 MB zip]&nbsp;&nbsp;</small></a>
-				<a href="http://mapshaper.org/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson (N/A)</a>
-				</li><br><br>
+			  <hr 75%>
+        <li class="left"><B>Trip purpose summary by segment: </B><br><i>Aggregated/summarized data for each segment in the network</i></li> 
+        <li class="right">
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[1 MB zip]&nbsp;&nbsp;</small></a>        
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_Geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[1.1 MB zip]</small></a>
+        </li> <br>
 				<li class="left"><B>Trip by trip summary: </B><br><i>Line work for individual CyclePhilly trips</i></li>	
 				<li class="right">
 				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[3.2 MB zip]&nbsp;&nbsp;</small></a>
-			    <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[4.8 MB zip]</small></a>
+			  <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[4.8 MB zip]</small></a>
 				</li>	<br>
-				<li class="left"><B>Trip purpose summary by segment: </B><br><i>Aggregated/summarized data for each segment in the network</i></li>	
-				<li class="right">
-	            <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[1 MB zip]&nbsp;&nbsp;</small></a>				
-		    	<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_Geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[1.1 MB zip]</small></a>
-				</li>	<br>
-				<li class="left"><B>Segment network nodes: </B><br><i>Can be used with the above datasets to support spatial analysis</i></li>	
+        <li class="left"><B>Trip detail by segment: </B><br><i>Discrete trip data for each segment in the network</i></li>
+        <li class="right">
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/trip_detail_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[27 MB zip]&nbsp;&nbsp;</small></a>
+        <a href="http://mapshaper.org/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson (N/A)</a>
+        </li><br><br>
+				<li class="left"><B>Segment network nodes: </B><br><i>Can be used with the above datasets to support spatial analysis</i></li>
 				<li class="right">
 				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/nodes_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[0.71 MB zip]&nbsp;&nbsp;</small></a>
 				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/nodes_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[0.82 MB zip]</small></a>
-			    </li>
+			   </li>
 				</div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -456,6 +458,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>  
+
   <!--   <script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.standalone.js'></script> -->
 		
     <script src="js/app.js"></script>

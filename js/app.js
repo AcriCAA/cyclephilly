@@ -36,7 +36,7 @@ $(document.body).on('click', '.expand-one', function(){
 
 	  
 	$(document).ready(function() {
-	 // $('#aboutModal').modal();
+	  $('#aboutModal').modal();
 		 loadImageTOP();
   });	
 
@@ -111,14 +111,6 @@ $(document.body).on('click', '.expand-one', function(){
       '<p>Top Trip Purpose : <b>{{purpose}}</b></p>',
       '<p>Total CyclePhilly Trips : <b> {{ttrips}} </b></p>',
         '<table id="cyclephillydata">',
-             // '<thead>',
-             //    '<tr>',
-             //    '<td class="hiconeven"><b>', 
-             //    'Trip Purpose Type' ,
-            //     '</b></td>',
-            //     '<th class="hiconodd"></th>' ,
-            //     '</tr>',
-            //  '</thead>',
               '<tbody>',
                  '<tr class="odd">',
                  '<th>Commute</th><td>',
@@ -153,8 +145,7 @@ $(document.body).on('click', '.expand-one', function(){
                  '<b>{{shtrips}}</b>',
                  '</td>' ,
               '</tbody>',           
-                 '<table>',
-
+        '<table>',
     '</div>',
  '</div>',
   '<div class="cartodb-popup-tip-container">',
@@ -190,7 +181,7 @@ $(document.body).on('click', '.expand-one', function(){
     subLayer.infowindow.set({
               template:   INFOWINDOW_TEMPLATE,
               sanitizeTemplate: false,
-              width:      328,
+              width:      250,
               maxHeight:  400
             });
     subLayer.set(subLayerOptions);
