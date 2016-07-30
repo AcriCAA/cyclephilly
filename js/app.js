@@ -1,17 +1,46 @@
-   visLayerSwitcher();
-
-  $('.expand-one').click(function(){
-    $('.content-one').slideToggle('slow'); return false;
-	});
+  visLayerSwitcher();
 
   var selectedLayer;
 	$('#legendBox').appendTo('#map');
 	$('#DBox').appendTo('#map');
+
+
+$(function () {
+    $('.glyphicon').unbind('click');
+    $('.glyphicon').click(function (e) {
+        $(this).toggleClass('glyphicon glyphicon-plus glyphicon glyphicon-minus');
+        $('.content-one').slideToggle('slow'); return false;
+});
+  });
+
+
+    // legend toggle
+/*
+$(document.body).on('click', '.expand-one', function(){
+    var toggleStatus = $('.content-one').attr('data-status');
+
+    if(toggleStatus === 'open'){
+        $('.content-one').css('width', '320px').css('height', 'auto').attr('data-status', 'open');
+        $('.content-one').slideToggle('slow'); return false;
+        $('#legend-icon i').toggleClass('glyphicon glyphicon-list glyphicon glyphicon-minus');
+        $('#legend-icon .legend-label').hide();
+        $('.map-legend-items').show();
+    } else{
+        $('.content-one').attr('data-status', 'closed');
+        $('.content-one').slideToggle('slow'); return false;
+        $('#legend-icon i').toggleClass('glyphicon glyphicon-minus glyphicon glyphicon-list');
+        $('#legend-icon .legend-label').show();
+        $('.map-legend-items').hide();
+    }
+}); */
+
 	  
 	$(document).ready(function() {
 	  $('#aboutModal').modal();
 		 loadImageTOP();
   });	
+
+
 
  function loadImageTOP(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_top.png)');
@@ -64,66 +93,59 @@
   $('#legendBox').css('width', '180');
   $('#legendBox').css('height', '160');
   }
+
+
   
   function visLayerSwitcher() {
 // custom infowindow
   var INFOWINDOW_TEMPLATE = [
- '<div class="cartodb-popup header blue v2">',
+ '<div class="cartodb-popup header v2 stye="background:#000000">',
   '<a href="#close" class="cartodb-popup-close-button close">x</a>',
   '<div class="cartodb-popup-header">',
-    '<h4>Road name</h4>',
+    '<h4 style="color: #ffffff;">Segment Name</h4>',
     '<h1>{{linkname}}</h1>',
     '<span class="separator"></span>',
   '</div>',
   '<div class="cartodb-popup-content-wrapper">',
     '<div class="cartodb-popup-content">',
-      '<h4>Top trip purpose</h4>',
-      '<p>{{purpose}}</p>',
+      '<p>Top Trip Purpose : <b>{{purpose}}</b></p>',
+      '<p>Total CyclePhilly Trips : <b> {{ttrips}} </b></p>',
         '<table id="cyclephillydata">',
-              '<thead>',
-                 '<tr>',
-                 '<td class="hiconeven"><b>', 
-                 'Trip Purpose Type' ,
-                 '</b></td>',
-                 '<th class="hiconodd"></th>' ,
-                 '</tr>',
-              '</thead>',
               '<tbody>',
                  '<tr class="odd">',
                  '<th>Commute</th><td>',
-                 '{{cotrips}}',
-                 '</td><td>' ,
+                 '<b>{{cotrips}}</b>',
+                 '</td>' ,
                  '<tr class="even">',
                  '<th>Social</th><td>',
-                 '{{sotrips}}',
-                 '</td><td>' ,
+                 '<b>{{sotrips}}</b>',
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>Exercise</th><td>' ,
-                 '{{extrips}}',
-                 '</td><td>',
+                 '<b>{{extrips}}</b>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Errand</th><td>',
-                 '{{ertrips}}',
-                 '</td><td>' ,
+                 '<b>{{ertrips}}</b>',
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>Other (not specified)</th><td>' ,
-                 '{{ottrips}}',
-                 '</td><td>',
+                 '<b>{{ottrips}}</b>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Other Work Related</th><td>',
-                 '{{wotrips}}',
-                 '</td><td>' ,
+                 '<b>{{wotrips}}</b>',
+                 '</td>' ,
                  '<tr class="odd">',
                  '<th>School</th><td>' ,
-                 '{{sctrips}}',
-                 '</td><td>',
+                 '<b>{{sctrips}}</b>',
+                 '</td>',
                  '<tr class="even">',
                  '<th>Shopping</th><td>',
-                 '{{shtrips}}',
-                 '</td><td>' ,
+                 '<b>{{shtrips}}</b>',
+                 '</td>' ,
               '</tbody>',           
-                 '<table>',
-
+        '<table>',
     '</div>',
  '</div>',
   '<div class="cartodb-popup-tip-container">',
@@ -159,7 +181,7 @@
     subLayer.infowindow.set({
               template:   INFOWINDOW_TEMPLATE,
               sanitizeTemplate: false,
-              width:      328,
+              width:      250,
               maxHeight:  400
             });
     subLayer.set(subLayerOptions);
@@ -263,5 +285,6 @@
 }
 }
       });
+
 
 } /* end function () */
