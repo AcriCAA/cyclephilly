@@ -44,8 +44,8 @@ $(document.body).on('click', '.expand-one', function(){
 
  function loadImageTOP(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_top.png)');
-  $('#legendBox').css('width', '260');
-  $('#legendBox').css('height', '185');
+  $('#legendBox').css('width', '265');
+  $('#legendBox').css('height', '195');
   }
 	  
   function loadImage(){
@@ -55,7 +55,7 @@ $(document.body).on('click', '.expand-one', function(){
   }
   function loadImage1(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_cotrips.png)');
-  $('#legendBox').css('width', '230');
+  $('#legendBox').css('width', '200');
   $('#legendBox').css('height', '180');
   }
   function loadImage2(){
@@ -80,7 +80,7 @@ $(document.body).on('click', '.expand-one', function(){
   }
   function loadImage6(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_sotrips.png)');
-  $('#legendBox').css('width', '230');
+  $('#legendBox').css('width', '190');
   $('#legendBox').css('height', '180');
   }
   function loadImage7(){
