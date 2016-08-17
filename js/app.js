@@ -185,7 +185,7 @@ $(document.body).on('click', '.expand-one', function(){
 
       .done(function(vis,layer) {
         $("#zoomToRegion").on('click', function(e) {
-            vis.map.setView([39.97,-75.16,],10);
+            vis.map.setView([39.97,-75.16,],11);
         });
     })
 
