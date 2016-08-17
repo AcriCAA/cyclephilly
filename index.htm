@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>DVRPC - CyclePhilly Data Summary (May-October 2014)</title>
+    <title>DVRPC - CyclePhilly Data Summary (May,2014 through April,2016)</title>
 
     <!-- Core CSS -->
     <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" >
@@ -31,7 +31,7 @@
         }
         body {
             padding-top: 50px;
-            overflow-y:hidden;
+            overflow:hidden;
         }
         label {
             font-weight: normal;
@@ -83,10 +83,24 @@
             .leaflet-control-attribution {
                 display: none;
             }
+            #subheader{
+              display: none;
+            }
+             #DBox2{
+              display: none;
+            }
+            #legendBox{
+              display: none;
+            }
         }
         @media (max-width: 768px){
             .search-container {
                 width: 100%;
+            }
+        }
+         @media (max-width: 400px){
+             #cptitle{
+              display: none;
             }
         }
         /* Print Handling */
@@ -97,6 +111,9 @@
         }
 	
 		 .navbar-inverse .navbar-nav > li > a {
+      color: rgb(255, 255, 255);
+      }
+      .navbar-inverse .navbar-nav > li > a:hover{
       color: rgb(200, 200, 200);
       }
       .modal-header {
@@ -117,20 +134,23 @@
 
       #legendBox {
       position: absolute;
-      bottom: 45px;
-      left: 10px;
+     /* bottom: 45px;
+      left: 30px; */
+      bottom: 25px;
+      right: 25px;
       z-index: 1001;
       background-color: white;
       padding: 8px;
       border: 1px solid #444444;
+       border-radius: 5px;
       width:260px;
       height:185px;
       }
       #DBox2 {
       position: absolute;
       background:#808080;
-      bottom: 25px;
-      right: 1px;
+      bottom: 45px;
+      left: 12px;
       z-index: 1001;
       width:350px;
       border: 1px solid #000;
@@ -197,16 +217,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-			<span>	<a  href="http://www.dvrpc.org" target="_new"><img class="dvrpclogo" style="margin:10px 0px 0px 20px" src="img/dvrpc_logo_small.png"/></a> 
-			<a  href="http://www.cyclephilly.org/" target="_new"><img  style="margin:5px 0px 0px 20px" src="img/cpheader_bike.png"/></a> 	
-            <a  href="http://www.cyclephilly.org/" target="_new"><img  style="margin:4px 0px 0px 5px" src="img/cpheader.png"/></a>      	
-	        <img  style="margin:4px 0px 0px 5px" src="img/cpsubheader_rd2.png"/>
+			<span><a  href="http://www.dvrpc.org" target="_new"><img class="dvrpclogo" style="margin:10px 0px 0px 20px" src="img/dvrpc_logo_small.png"/></a> 
+			      <a  href="http://www.cyclephilly.org/" target="_new"><img  style="margin:5px 0px 0px 20px" src="img/cpheader_bike.png"/></a> 	
+            <a  href="http://www.cyclephilly.org/" target="_new"><img id="cptitle" style="margin:4px 0px 0px 5px" src="img/cpheader.png"/></a><img  id="subheader" style="margin:4px 0px 0px 5px" src="img/cpsubheader_rd2.png"/>
 			</span> 
         </div>
 		
         <div id="layer_selector_main" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-			  <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-question-sign" ></i>&nbsp;&nbsp;About</a></li>
+			  <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#aboutModal').modal('show'); return false;"><i class="icon-info-sign" ></i>&nbsp;&nbsp;About</a></li>
 			  
                  <li class="dropdown">
                     <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
@@ -218,13 +237,15 @@
 					   <li  id="zoomToRegion"><a href="javascript:void(0);"><i class="icon-fullscreen"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
 					   <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#legendModal').modal('show'); return false;"><i class="icon-list-alt"></i>&nbsp;&nbsp;Data Dictionary</a>
 					   </li>
-                        <li class="divider"></li>
+              <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#legend2Modal').modal('show'); return false;"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;Show Legend</a>
+             </li>
+            <li class="divider"></li>
 						<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#downloadModal').modal('show'); return false;"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Download Data</a>
 					   </li>
                     </ul>
                 </li>
 		  
-		  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i>&nbsp;Choose a Map</a>
+		  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i>&nbsp;Choose a Trip Purpose<b class="caret"></b></a>
           <ul class="dropdown-menu" id="layer_selector" style="margin-right:15px;">
             <li id="purposemax" class="button purposemax selected" style="text-transform: none;">Most Popular Trip Purpose</li>
             <li id="ttrips" class="button ttrips" style="text-transform: none;">Total Trips</li>
@@ -250,7 +271,7 @@
         <div id="legendBox"></div>	
 			  <div id="DBox2">
 			  <div class="expand-one"><i class="glyphicon glyphicon-minus"></i>&nbsp;&nbsp;About this Map</div> 
-			   <p class="content-one" >This map symbolizes total CyclePhilly trips by facility from May, 2014 through April, 2016<br> (2 years; 12,202 individual trips by 300 unique CyclePhilly users).<br><br>Note that this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</p>
+			   <p class="content-one" >This map symbolizes total CyclePhilly trips by facility from May,2014 through April,2016<br> (2 years; 12,202 individual trips by 300 unique CyclePhilly users).<br><br>Note that this is a map of CyclePhilly trips, not a map of all bicycling in the city and region; CyclePhilly users' trip patterns may not reflect those of all cyclists.</p>
 
          <!-- Round 1(6 months; 8,340 individual trips by 220 unique CyclePhilly users). -->
 		   </div>	
@@ -432,17 +453,17 @@
 			  <hr 75%>
         <li class="left"><B>Trip purpose summary by segment: </B><br><i>Aggregated/summarized data for each segment in the network</i></li> 
         <li class="right">
-        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[1 MB zip]&nbsp;&nbsp;</small></a>        
-        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/CyclePhilly_Geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[1.1 MB zip]</small></a>
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/cyclephilly_rd2_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[1.4 MB zip]&nbsp;&nbsp;</small></a>        
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/cyclephilly_rd2_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[1.4 MB zip]</small></a>
         </li> <br>
 				<li class="left"><B>Trip by trip summary: </B><br><i>Line work for individual CyclePhilly trips</i></li>	
 				<li class="right">
-				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[3.2 MB zip]&nbsp;&nbsp;</small></a>
-			  <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[4.8 MB zip]</small></a>
+				<a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[4.2 MB zip]&nbsp;&nbsp;</small></a>
+			  <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/tripbytrip_geojson.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson<small style="opacity:0.6">&nbsp;&nbsp;[5.7 MB zip]</small></a>
 				</li>	<br>
         <li class="left"><B>Trip detail by segment: </B><br><i>Discrete trip data for each segment in the network</i></li>
         <li class="right">
-        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/trip_detail_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[27 MB zip]&nbsp;&nbsp;</small></a>
+        <a href="http://www.dvrpc.org/webmaps/cyclephilly/data/trip_detail_shp.zip"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Shapefile<small style="opacity:0.6">&nbsp;&nbsp;[43 MB zip]&nbsp;&nbsp;</small></a>
         <a href="http://mapshaper.org/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;GeoJson (N/A)</a>
         </li><br><br>
 				<li class="left"><B>Segment network nodes: </B><br><i>Can be used with the above datasets to support spatial analysis</i></li>
@@ -454,6 +475,27 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+  </div>
+
+     <div class="modal fade" id="legend2Modal">
+        <div class="modal-dialog"style="width:750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">CyclePhilly Map Legend</h4>
+                </div>
+                <div class="modal-body">
+        <div class="clearfix">
+        <p><img style="margin:4px 0px 0px 5px" src="img/all_legends.png"
+        </p>      
+        </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  </div>
+
+
+    
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
