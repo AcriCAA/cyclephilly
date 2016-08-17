@@ -113,8 +113,16 @@
 		 .navbar-inverse .navbar-nav > li > a {
       color: rgb(255, 255, 255);
       }
+      .navbar-inverse .navbar-nav > .dropdown > a .caret {
+       border-top-color: #FFFFFF;
+       border-bottom-color: #FFFFFF; 
+      }
       .navbar-inverse .navbar-nav > li > a:hover{
       color: rgb(200, 200, 200);
+      }
+      .navbar-inverse .navbar-nav > .dropdown > a .caret:hover {
+       border-top-color: #999;
+       border-bottom-color: #999; 
       }
       .modal-header {
        background-color:#0074ad;
@@ -157,6 +165,12 @@
       border-radius: 5px;
       padding: 1px 20px;
       box-shadow: 10px 10px 65px 0px rgba(0, 0, 0, 0.75);
+      }
+      #changeBox {
+      position: absolute;
+      top: 18px;
+      right: 25px;
+      z-index: 1001;
       }
       .expand-one{
       color: white;
@@ -244,22 +258,7 @@
 					   </li>
                     </ul>
                 </li>
-		  
-		  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i>&nbsp;Choose a Trip Purpose<b class="caret"></b></a>
-          <ul class="dropdown-menu" id="layer_selector" style="margin-right:15px;">
-            <li id="purposemax" class="button purposemax selected" style="text-transform: none;">Most Popular Trip Purpose</li>
-            <li id="ttrips" class="button ttrips" style="text-transform: none;">Total Trips</li>
-            <li id="workcommute" class="button workcommute">Commute</li>
-            <li id="social" class="button social">Social</li>
-            <li id="exercise" class="button exercise">Exercise</li>
-            <li id="errand" class="button errand">Errand</li>
-            <li id="other" class="button other">Other (not specified)</li>
-            <li id="otherwork" class="button otherwork">Other Work Related</li>
-            <li id="school" class="button school">School</li>
-            <li id="shopping" class="button shopping">Shopping</li>
-          </ul>
-        </li>
-		
+         <!-- this is where the dropdown menu was -->       
           </ul>
          
         </div><!--/.navbar-collapse -->
@@ -268,6 +267,30 @@
  <div class="row" id="container">
 		
         <div class="col-sm-12 col-lg-12" id="map"></div>	
+         <div id="changeBox">
+
+            <div class="dropdown">
+    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">&nbsp;<B>Choose a Trip Purpose</b>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" id="layer_selector" style="margin-right:15px">
+            <li id="purposemax" class="button purposemax selected" style="text-transform:none;font-size: 12px;">Most Popular Trip Purpose</li>
+            <li id="ttrips" class="button ttrips" style="text-transform: none;font-size: 12px;">Total Trips</li>
+            <li id="workcommute" class="button workcommute" style="text-transform: none;font-size: 12px;">Commute</li>
+            <li id="social" class="button social" style="text-transform: none;font-size: 12px;">Social</li>
+            <li id="exercise" class="button exercise" style="text-transform: none;font-size: 12px;">Exercise</li>
+            <li id="errand" class="button errand" style="text-transform: none;font-size: 12px;">Errand</li>
+            <li id="other" class="button other" style="text-transform: none;font-size: 12px;">Other (not specified)</li>
+            <li id="otherwork" class="button otherwork" style="text-transform: none;font-size: 12px;">Other Work Related</li>
+            <li id="school" class="button school" style="text-transform: none;font-size: 12px;">School</li>
+            <li id="shopping" class="button shopping" style="text-transform: none;font-size: 12px;">Shopping</li>
+          </ul>
+  </div>
+        
+            <!--   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i>&nbsp;Choose a Trip Purpose<b class="caret"></b></a> -->
+          
+        </li>
+     
+      </div>
         <div id="legendBox"></div>	
 			  <div id="DBox2">
 			  <div class="expand-one"><i class="glyphicon glyphicon-minus"></i>&nbsp;&nbsp;About this Map</div> 

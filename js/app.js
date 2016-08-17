@@ -3,16 +3,15 @@
   var selectedLayer;
 	$('#legendBox').appendTo('#map');
 	$('#DBox').appendTo('#map');
+  $('#changeBox').appendTo('#map');
 
-
-$(function () {
-    $('.glyphicon').unbind('click');
-    $('.glyphicon').click(function (e) {
-        $(this).toggleClass('glyphicon glyphicon-plus glyphicon glyphicon-minus');
-        $('.content-one').slideToggle('slow'); return false;
-});
+  $(function () {
+      $('.glyphicon').unbind('click');
+      $('.glyphicon').click(function (e) {
+          $(this).toggleClass('glyphicon glyphicon-plus glyphicon glyphicon-minus');
+          $('.content-one').slideToggle('slow'); return false;
   });
-
+    });
 
     // legend toggle
 /*
@@ -39,8 +38,6 @@ $(document.body).on('click', '.expand-one', function(){
 	  $('#aboutModal').modal();
 		 loadImageTOP();
   });	
-
-
 
  function loadImageTOP(){
   $('#legendBox').css('backgroundImage', 'url(img/lng_top.png)');
@@ -93,11 +90,9 @@ $(document.body).on('click', '.expand-one', function(){
   $('#legendBox').css('width', '180');
   $('#legendBox').css('height', '160');
   }
-
-
   
   function visLayerSwitcher() {
-// custom infowindow
+  // custom infowindow
   var INFOWINDOW_TEMPLATE = [
  '<div class="cartodb-popup header v2 stye="background:#000000">',
   '<a href="#close" class="cartodb-popup-close-button close">x</a>',
